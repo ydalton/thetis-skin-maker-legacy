@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<interface>
+  <template class="ThetisSkinMakerWindow" parent="GtkApplicationWindow">
+    <property name="default-width">450</property>
+    <property name="default-height">500</property>
+    <!-- <property name="resizable">false</property> -->
+    <property name="window-position">center</property>
+    <property name="title">ThetisSkinMaker</property>
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <property name="visible">true</property>
+        <property name="margin-start">6</property>
+        <property name="margin-end">6</property>
+        <child>
+          <object class="GtkFrame">
+            <property name="label">Skin name</property>
+            <property name="tooltip-text">
+              This is the name of the skin that you want to make.
+            </property>
+            <property name="visible">true</property>
+            <child>
+              <object class="GtkEntry" id="name_entry">
+                <property name="placeholder-text">Enter the name of your skin...</property>
+                <property name="visible">true</property>
+                <property name="margin-top">6</property>
+                <property name="margin-bottom">6</property>
+                <property name="margin-start">6</property>
+                <property name="margin-end">6</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkFrame" id="base_skin_frame">
+            <property name="visible">true</property>
+            <property name="label">Base skin</property>
+            <child>
+              <object class="GtkComboBox" id="dropdown">
+                <property name="visible">true</property>
+                <property name="margin-top">6</property>
+                <property name="margin-bottom">6</property>
+                <property name="margin-start">6</property>
+                <property name="margin-end">6</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkFrame">
+            <property name="label">Image for background</property>
+            <property name="visible">true</property>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">true</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">6</property>
+                <property name="margin-top">6</property>
+                <property name="margin-bottom">6</property>
+                <property name="margin-start">6</property>
+                <property name="margin-end">6</property>
+                <child>
+                  <object class="GtkFileChooserButton" id="chooser">
+                    <property name="action">open</property>
+                    <property name="visible">true</property>
+                    <signal name="selection-changed" handler="on_selection_changed_cb" />
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkImage" id="preview">
+                    <property name="visible">false</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkFrame">
+            <property name="label">Actions</property>
+            <property name="visible">true</property>
+            <property name="valign">fill</property>
+            <property name="vexpand">false</property>
+            <property name="margin-bottom">6</property>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">true</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">6</property>
+                <property name="margin-top">6</property>
+                <property name="margin-bottom">6</property>
+                <property name="margin-start">6</property>
+                <property name="margin-end">6</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">true</property>
+                    <property name="spacing">6</property>
+                    <child>
+                      <object class="GtkButton">
+                        <property name="height-request">36</property>
+                        <property name="hexpand">true</property>
+                        <property name="halign">fill</property>
+                        <property name="visible">true</property>
+                        <property name="label">Save skin</property>
+                        <property name="action-name">win.save</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton">
+                        <property name="visible">true</property>
+                        <property name="label">New skin</property>
+                        <property name="action-name">win.new</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
