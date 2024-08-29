@@ -46,6 +46,10 @@ done
 # Copy the gdbus binary, since it wants it so bad
 cp $(which gdbus) $BINDIR
 
+# These are needed to spawn applications, which is used by the program
+cp $(which gspawn-win64-helper) $BINDIR
+cp $(which gspawn-win64-helper-console) $BINDIR
+
 # We only need these two themes, I think
 cp -r /mingw64/share/icons/hicolor $SHAREDIR/icons
 cp -r /mingw64/share/icons/AdwaitaLegacy $SHAREDIR/icons
