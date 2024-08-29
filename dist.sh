@@ -4,7 +4,7 @@
 
 set -eu
 
-OUTDIR=output
+OUTDIR=ThetisSkinMaker
 BINDIR=$OUTDIR/bin
 LIBDIR=$OUTDIR/lib
 SHAREDIR=$OUTDIR/share
@@ -20,10 +20,11 @@ mkdir -p $LIBDIR
 mkdir -p $SHAREDIR
 mkdir -p $SHAREDIR/icons
 mkdir -p $SHAREDIR/glib-2.0/schemas
-echo "Done"
+echo "done"
 
 echo -n "Copying required files... "
 cp ./ThetisSkinMaker.bat $OUTDIR
+cp ./README.txt $OUTDIR
 cp ./build/thetisskinmaker.exe $OUTDIR/bin
 
 # Copy all dependent libraries
@@ -41,8 +42,12 @@ cp -r /mingw64/share/icons/AdwaitaLegacy $SHAREDIR/icons
 cp -r /mingw64/lib/gdk-pixbuf-2.0 $LIBDIR
 cp /mingw64/share/glib-2.0/schemas/org.gtk.Settings* $SHAREDIR/glib-2.0/schemas
 
-echo "Done"
+echo "done"
 
 echo -n "Compiling gschema schema... "
 glib-compile-schemas $SHAREDIR/glib-2.0/schemas
-echo "Done"
+echo "done"
+
+echo -n "Compressing into a zip archive... "
+zip -r $OUTDIR.zip $OUTDIR > /dev/null
+echo "done"
