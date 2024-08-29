@@ -15,9 +15,6 @@
         <child>
           <object class="GtkFrame">
             <property name="label">Skin name</property>
-            <property name="tooltip-text">
-              This is the name of the skin that you want to make.
-            </property>
             <property name="visible">true</property>
             <child>
               <object class="GtkEntry" id="name_entry">

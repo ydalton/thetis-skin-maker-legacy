@@ -22,13 +22,7 @@ public class Window : Gtk.ApplicationWindow
         }
     }
 
-    private bool is_dirty {
-        get {
-            return (bg_image != null) || (name_entry.text != "");
-        } set {
-
-        }
-    }
+    private bool is_saved = false;
 
     /* FIXME: hardcoded */
     private float image_width = 450.0f;
@@ -152,13 +146,14 @@ public class Window : Gtk.ApplicationWindow
 
         show_info_box("Skin Saved",
                       "Skin successfully saved! Please restart Thetis if it is already open.");
-        is_dirty = false;
+        
+        is_saved = true;
     }
 
     private void activate_new()
     {
-        if(is_dirty) {
-            MessageBoxResponse ret = show_yes_no_box("Confirm Discard?",
+        if(!is_saved) {
+            int ret = show_yes_no_box("Confirm Discard?",
                                                      "Are you sure you want to discard this skin?");
             switch(ret) {
             case MessageBoxResponse.IDYES:
@@ -173,6 +168,8 @@ public class Window : Gtk.ApplicationWindow
         this.preview.pixbuf = null;
         this.chooser.unselect_all();
         this.name_entry.text = "";
+
+        is_saved = false;
     }
 
     private void add_file_filters()
