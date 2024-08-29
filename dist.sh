@@ -13,6 +13,17 @@ SHAREDIR=$OUTDIR/share
 # the GdkPixbuf loaders.
 files=$(cat <(ldd ./build/thetisskinmaker.exe) <(ldd /mingw64/lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-jpeg.dll) | grep mingw64 | uniq | awk '{print $3}')
 
+echo -n "Calculating module dependencies... "
+
+ldd ./build/thetisskinmaker.exe > deps
+ldd /mingw64/lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-jpeg.dll >> deps
+
+files=$(cat deps | grep mingw64 | sort | awk '{print $3}' | uniq)
+
+rm deps
+
+echo "done"
+
 echo -n "Making required folders... "
 mkdir -p $OUTDIR
 mkdir -p $BINDIR
