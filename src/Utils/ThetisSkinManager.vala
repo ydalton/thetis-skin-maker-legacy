@@ -109,7 +109,8 @@ public class ThetisSkinManager : ISkinManager, Object
         try {
             Process.spawn_command_line_sync(xcopy_cmd);
         } catch (SpawnError e) {
-            throw new SkinError.CODE_UNKNOWN_ERROR(e.message);
+            throw new SkinError.CODE_UNKNOWN_ERROR("Could not copy skin folder: "
+                                                   + e.message);
         }
 
         var picdpy = Path.build_filename(new_skin_path,
