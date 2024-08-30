@@ -14,9 +14,15 @@ else
     error('Compiling on non-Windows platforms is not supported.')
 endif
 
-
+config_data = configuration_data()
+config_data.set_quoted('VERSION', meson.project_version())
 
 tsm_src = files()
+tsm_src += configure_file(
+    input: 'src/config.vala.in',
+    output: '@BASENAME@',
+    configuration: config_data
+)
 subdir('src')
 
 tsm_dep = [

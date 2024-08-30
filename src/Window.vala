@@ -80,6 +80,7 @@ public class Window : Gtk.ApplicationWindow
         Gtk.show_about_dialog(this,
                               program_name: "ThetisSkinMaker",
                               copyright: "Copyright 2024 Yussef Dalton",
+                              version: VERSION,
                               comments: "With special thanks to John Dalton ON8EI");
     }
 
