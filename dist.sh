@@ -4,7 +4,14 @@
 
 set -eu
 
-OUTDIR=ThetisSkinMaker
+NAME=ThetisSkinMaker
+
+if [ ! -z ${VERSION+x} ]; then
+    OUTDIR=$NAME-$VERSION
+else
+    OUTDIR=$NAME
+fi
+
 BINDIR=$OUTDIR/bin
 LIBDIR=$OUTDIR/lib
 SHAREDIR=$OUTDIR/share
