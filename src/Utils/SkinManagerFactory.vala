@@ -9,7 +9,11 @@ public class SkinManagerFactory
     {
         if(_instance == null) {
             /* FIXME: preprocessing directives do not work. */
+            #if _WIN32
             _instance = new ThetisSkinManager();
+            #else
+            _instance = new NoopSkinManager();
+            #endif
         }
         return _instance;
     }

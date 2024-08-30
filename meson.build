@@ -6,9 +6,15 @@ project(
 
 gnome = import('gnome')
 
-if host_machine.system() != 'windows'
+vala = meson.get_compiler('vala')
+
+if host_machine.system() == 'windows'
+    add_project_arguments('-D', '_WIN32', language: 'vala')
+else
     error('Compiling on non-Windows platforms is not supported.')
 endif
+
+
 
 tsm_src = files()
 subdir('src')
