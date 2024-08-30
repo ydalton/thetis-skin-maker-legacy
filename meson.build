@@ -1,7 +1,7 @@
 project(
     'ThetisSkinMaker',
     ['vala', 'c'],
-    version: 'v0.1.0-alpha'
+    version: 'v0.1.1-alpha'
 )
 
 gnome = import('gnome')
