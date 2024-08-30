@@ -59,8 +59,13 @@ public class Window : Gtk.ApplicationWindow
                            "Could not open the Thetis skin folder, is Thetis installed?");
             Process.exit(-1);
         }
-        /* FIXME: why is this not getting filled? */
+
         dropdown.model = build_model_from_list(skins);
+
+        /* why? */
+        var renderer = new Gtk.CellRendererText();
+        dropdown.pack_start(renderer, true);
+        dropdown.add_attribute(renderer, "text", 0);
 
         this.add_action_entries(win_entries, this);
     }
@@ -134,11 +139,10 @@ public class Window : Gtk.ApplicationWindow
         /* normally this should never fail */
         assert(FileUtils.test(this.chooser.get_filename(), FileTest.EXISTS));
 
-        /* TODO: when the dropdown menu works, then we can pass an actual value
-         * for the base skin.
-         */
+        string base_skin = get_selected_item(dropdown);
+
         try {
-            skin_manager.save_skin(skin_name, bg_image, null);
+            skin_manager.save_skin(skin_name, bg_image, base_skin);
         } catch (Error e) {
             show_error_box("Error", "Error! " + e.message);
             return;
@@ -190,6 +194,20 @@ public class Window : Gtk.ApplicationWindow
         all_filter.set_name("All files");
 
         this.chooser.add_filter(all_filter);
+    }
+
+    private string? get_selected_item(Gtk.ComboBox box)
+    {
+        string selected_item;
+        Gtk.TreeIter iter;
+
+        /* empty */
+        if(!box.get_active_iter(out iter))
+            return null;
+
+        var model = dropdown.model;
+        model.get(iter, 0, out selected_item);
+        return selected_item;
     }
 
     private Gtk.TreeModel build_model_from_list(List<string> list)
