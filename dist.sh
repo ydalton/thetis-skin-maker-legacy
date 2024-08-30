@@ -52,7 +52,6 @@ cp $(which gspawn-win64-helper-console) $BINDIR
 
 # We only need these two themes, I think
 cp -r /mingw64/share/icons/hicolor $SHAREDIR/icons
-cp -r /mingw64/share/icons/AdwaitaLegacy $SHAREDIR/icons
 # otherwise we can't load any images
 cp -r /mingw64/lib/gdk-pixbuf-2.0 $LIBDIR
 cp /mingw64/share/glib-2.0/schemas/org.gtk.Settings* $SHAREDIR/glib-2.0/schemas
