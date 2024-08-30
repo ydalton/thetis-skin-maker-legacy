@@ -2,6 +2,7 @@ extern int show_info_box(string title, string text);
 extern int show_warning_box(string title, string text);
 extern int show_error_box(string title, string text);
 extern int show_yes_no_box(string title, string text);
+extern int copy_folder(string src, string dest);
 
 enum MessageBoxResponse {
     IDCANCEL = 2,
@@ -99,19 +100,9 @@ public class ThetisSkinManager : ISkinManager, Object
 
         if(FileUtils.test(new_skin_path, FileTest.EXISTS))
             throw new SkinError.CODE_FOLDER_EXISTS("A skin with that name already exists.");
-        /*
-         * XXX: perform sanitization?
-         */
-        string xcopy_cmd = @"xcopy '$base_skin_path' '$new_skin_path' /s /e /q";
 
-        message("%s", xcopy_cmd);
-
-        try {
-            Process.spawn_command_line_sync(xcopy_cmd);
-        } catch (SpawnError e) {
-            throw new SkinError.CODE_UNKNOWN_ERROR("Could not copy skin folder: "
-                                                   + e.message);
-        }
+        if(copy_folder(base_skin_path, new_skin_path) != 0)
+            throw new SkinError.CODE_UNKNOWN_ERROR("Failed to duplicate the base skin folder.");
 
         var picdpy = Path.build_filename(new_skin_path,
                                          THETIS_PICDISPLAY_PATH);
