@@ -8,7 +8,6 @@ public class SkinManagerFactory
     public static ISkinManager get_default()
     {
         if(_instance == null) {
-            /* FIXME: preprocessing directives do not work. */
             #if _WIN32
             _instance = new ThetisSkinManager();
             #else
