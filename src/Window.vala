@@ -168,6 +168,7 @@ public class Window : Gtk.ApplicationWindow
             }
         }
 
+        this.dropdown.active = -1;
         this.bg_image = null;
         this.preview.pixbuf = null;
         this.chooser.unselect_all();
